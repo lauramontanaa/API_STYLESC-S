@@ -17,7 +17,7 @@ class ClotheController{
                 switch($this->_complement){
                     case 0:
                         $clothe = ClotheModel::all(0);
-                        $json = array("response: "=>$clothe);
+                        $json = $clothe;
                         echo json_encode($json);
                         return;
                     default:

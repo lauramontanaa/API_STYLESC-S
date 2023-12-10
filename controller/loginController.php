@@ -12,13 +12,14 @@
             switch($this->_method){
                 case 'POST':
                     $credencials = UserModel::login($this->_data);
+                    //var_dump($credencials,$this->_data);
                     $result=[];
                     if (!empty($credencials)){
                         $result["credencials"] = $credencials;
                         $result["mensaje"] = "OK";
                     }else{
                         $result["credencials"] = null;
-                        $result["mensaje"] = "ERROR EN CREDENCIALS";
+                        $result["mensaje"] = "ERROR EN CREDENCIALS 3";
                         $header = "HTTP/1.1 400 FAIL";
                     }
                     echo json_encode($result,JSON_UNESCAPED_UNICODE);

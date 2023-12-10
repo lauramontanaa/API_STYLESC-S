@@ -33,23 +33,17 @@ class UserController{
                 }
             case "POST":
                 $createUser = UserModel::createUser($this->generateSalting());
-                $json = array(
-                    "response: "=>$createUser
-                );
+                $json = $createUser;
                 echo json_encode($json,true);
                 return;
             case "PUT":
                 $createUser = UserModel::update($this->_complement,$this->_data);
-                $json = array(
-                    "response: "=>$createUser
-                );
+                $json = $createUser;
                 echo json_encode($json,true);
                 return;
             case "DELETE":
                 $createUser = UserModel::delete($this->_complement);
-                $json = array(
-                    "response: "=>$createUser
-                );
+                $json = $createUser;
                 echo json_encode($json,true);
                 return;
             default:

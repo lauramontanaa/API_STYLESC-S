@@ -14,16 +14,16 @@ class UserModel{
     static public function createUser($data){
         $cantMail = self::getMail($data["use_email"]);
         if($cantMail==0){
-           // $date = date("Y-m-d");
+            $date = date("Y-m-d");
             $status = "1";
-             $query = "INSERT INTO users(use_id, use_name, use_email, use_password, use_phone, use_address, use_datecreate, use_identifier, use_key, use_status)VALUES (NULL, :use_name, :use_email, :use_password, :use_phone, :use_address, :use_datecreate, :use_identifier, :use_key, :use_status);";
+            $query = "INSERT INTO users(use_id, use_name, use_email, use_password, use_phone, use_address, use_datecreate, use_identifier, use_key, use_status)VALUES (NULL, :use_name, :use_email, :use_password, :use_phone, :use_address, :use_datecreate, :use_identifier, :use_key, :use_status);";
             $statement = Connection::connection()->prepare($query);
             $statement-> bindParam(":use_name", $data["use_name"],PDO::PARAM_STR);
             $statement-> bindParam(":use_email",  $data["use_email"],PDO::PARAM_STR);
             $statement-> bindParam(":use_password", $data["use_password"],PDO::PARAM_STR);
             $statement-> bindParam(":use_phone", $data["use_phone"],PDO::PARAM_STR);
             $statement-> bindParam(":use_address", $data["use_address"],PDO::PARAM_STR);
-            $statement-> bindParam(":use_datecreate", $data["use_datecreate"],PDO::PARAM_STR);
+            $statement-> bindParam(":use_datecreate", $date,PDO::PARAM_STR);
             $statement-> bindParam(":use_identifier", $data["use_identifier"],PDO::PARAM_STR);
             $statement-> bindParam(":use_key", $data["use_key"],PDO::PARAM_STR);                       
             $statement-> bindParam(":use_status",$status,PDO::PARAM_STR); 
@@ -60,7 +60,7 @@ class UserModel{
 
     static public function login($data){
         $user = $data['use_email'];
-        $pass = md5($data['use_password']);
+        $pass = $data['use_password'];
 
         if (!empty($user) && !empty($pass)){
             $query="SELECT  use_id, use_identifier, use_key FROM users WHERE use_email = '$user' and use_password='$pass' and use_status='1'";
