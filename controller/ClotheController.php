@@ -17,13 +17,13 @@ class ClotheController{
                 switch($this->_complement){
                     case 0:
                         $clothe = ClotheModel::all(0);
-                        $json = $clothe;
+                        $json = array("clothes"=>$clothe);
                         echo json_encode($json);
                         return;
                     default:
                         $clothe = ClotheModel::find($this->_complement);
                         if ($clothe==null)
-                            $json = array("response: "=>"clothe not found");
+                            $json = array("clothes"=>"clothe not found");
                         else
                             $json = $clothe;
                         echo json_encode($json);
@@ -32,14 +32,14 @@ class ClotheController{
             case "POST":
                 $createclothe = ClotheModel::create($this->_data);
                 $json = array(
-                    "response: "=>$createclothe
+                    "clothes"=>$createclothe
                 );
                 echo json_encode($json);
                 return;
             case "PUT":
                 $createclothe = ClotheModel::update($this->_complement,$this->_data);
                 $json = array(
-                    "response: "=>$createclothe
+                    "clothes"=>$createclothe
                 );
                 echo json_encode($json,true);
                 return;
@@ -49,6 +49,7 @@ class ClotheController{
                 );
                 echo json_encode($json,true);
                 return;
+            //DELETE
         }
     }
 }

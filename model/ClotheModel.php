@@ -22,6 +22,7 @@ class ClotheModel {
 
     public static function create($data){
         $query = "INSERT INTO `clothes`(`clo_name`, `clo_price`, `clo_stock`, `clo_details`) VALUES ('".$data['clo_name']."','".$data['clo_price']."','".$data['clo_stock']."','".$data['clo_details']."')";
+        return $query;
         $statement = Connection::connection()->prepare($query);
         $statement->execute();
         $message = array("Clothe created successfully");

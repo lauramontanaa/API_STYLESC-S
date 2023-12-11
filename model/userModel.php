@@ -76,7 +76,7 @@ class UserModel{
 
     static public function update($id,$data){
         $pass = md5($data['use_password']);
-        $query = "UPDATE users SET use_email='".$data['use_email']."',use_password='".$pass."' WHERE use_id = ".$id.";";
+        $query = "UPDATE users SET use_name='".$data['use_name']."',use_email='".$data['use_email']."',use_password='".$pass."',use_phone='".$data['use_phone']."',use_address='".$data['use_address']."' WHERE use_id = ".$id.";";
         $statement = Connection::connection()->prepare($query);
         $statement->execute();
         $msg = array(
