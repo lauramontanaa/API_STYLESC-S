@@ -19,8 +19,8 @@ class UserController{
                 switch($this->_complement){
                     case 0:
                         $user = UserModel::getUsers(0);
-                        $json = array("response"=>$user);
-                        echo json_encode($json);
+                        $array = array("user" => $user);
+                        echo json_encode($array);
                         return;
                     default:
                         $user = UserModel::getUsers($this->_complement);
