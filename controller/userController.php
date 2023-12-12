@@ -10,7 +10,7 @@ class UserController{
         $this->_method = $method;
         $this->_complement = $complement;
         $this->_data = $data !=0 ? $data : "";
-       
+    
     }
 
     public function index(){
@@ -21,20 +21,36 @@ class UserController{
                         $user = UserModel::getUsers(0);
                         $array = array("user" => $user);
                         echo json_encode($array);
+ 
+                        $result=[];
+                        if (!empty($user)){
+                            $result["users"] = $user;                          
+                        }else{
+                            $result["users"] = null;                            
+                           
+                        }
+                        echo json_encode($result);
                         return;
                     default:
                         $user = UserModel::getUsers($this->_complement);
-                        if ($user==null) 
-                            $json = ["msg"=>"No existe el usuario"];
-                        else
-                            $json = $user;
-                        echo json_encode($json);
+                        if ($user==null) {
+                            $result["users"] = null;                            
+                           
+                    }else{
+                        $json = $user;
+                       // var_export($json);
+                        $result=[];
+                            if (!empty($json)){
+                                $result["users"] = $json;                              
+                            }
+                        }
+                        echo json_encode($result);
                         return;
                 }
             case "POST":
                 $createUser = UserModel::createUser($this->generateSalting());
-                $json = array("response"=>$user);
-                echo json_encode($json,true);
+                $array = array("response" => $user);
+                echo json_encode($array);
                 return;
             case "PUT":
                 $createUser = UserModel::update($this->_complement,$this->_data);
