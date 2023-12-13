@@ -24,7 +24,6 @@ class UserController{
                             $result["users"] = $user;                          
                         }else{
                             $result["users"] = null;                            
-                           
                         }
                         echo json_encode($result);
                         return;
@@ -50,8 +49,10 @@ class UserController{
                 return;
             case "PUT":
                 $createUser = UserModel::update($this->_complement,$this->_data);
-                $json = array("response"=>$createUser);
-                echo json_encode($json,true);
+                $result=[];
+                $result["users"] = $createUser;
+                //$array = array("response"=>$createUser);
+                echo json_encode($result);
                 return;
             case "DELETE":
                 $createUser = UserModel::delete($this->_complement);
